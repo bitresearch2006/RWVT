@@ -1,10 +1,11 @@
 # test_voice_to_text.py
-
+import unittest
 import os
 import wave
 import json
 import speech_recognition as sr
 import sys
+import base64
 # Add the directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../main')))
 

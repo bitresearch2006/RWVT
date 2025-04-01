@@ -61,7 +61,7 @@ def rwvt(sub_json, diagnostics=False):
                 return {"status": "ERROR", "error_reason": "Speech recognition could not understand audio"}
             except sr.RequestError as e:
                 log_event("Speech recognition request failed", error_message=str(e))
-                return {"status": "ERROR", "error_reason": f"Speech recognition request failed: {e}")
+                return {"status": "ERROR", "error_reason": f"Speech recognition request failed: {e}"}
 
     except Exception as e:
         log_event("Exception occurred", error_message=str(e))
