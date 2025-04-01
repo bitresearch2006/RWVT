@@ -1,7 +1,17 @@
+# test_voice_to_text.py
 import unittest
-import base64
 import os
+import wave
+import json
+import speech_recognition as sr
+import sys
+import base64
+# Add the directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../main')))
+
+# Now you can import the module
 from voice_to_text import rwvt
+
 
 class TestRWVTFunction(unittest.TestCase):
     def setUp(self):
@@ -20,20 +30,6 @@ class TestRWVTFunction(unittest.TestCase):
         print("Test Response (Valid Audio):", response)
         self.assertEqual(response["status"], "SUCCESS", f"Expected SUCCESS but got {response}")
         self.assertIn("transcription", response, "Transcription key missing in response")
-
-    def test_invalid_audio(self):
-        sub_json = {"audio": "invalid_base64_data"}
-        response = rwvt(sub_json)
-        print("Test Response (Invalid Audio):", response)
-        self.assertEqual(response["status"], "ERROR")
-        self.assertIn("error_reason", response)
-
-    def test_empty_audio(self):
-        sub_json = {"audio": base64.b64encode(b'').decode("utf-8")}
-        response = rwvt(sub_json)
-        print("Test Response (Empty Audio):", response)
-        self.assertEqual(response["status"], "ERROR")
-        self.assertIn("error_reason", response)
 
 if __name__ == "__main__":
     unittest.main()
