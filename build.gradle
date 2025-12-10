@@ -65,7 +65,7 @@ tasks.create("copySources") {
         // Copy requirements.txt
         copy {
             from "requirements.txt"
-            into "build"
+            into "build/main"
         }        
 
         println "Copied main/, ${functionName}.yml and requirements.txt into build/"

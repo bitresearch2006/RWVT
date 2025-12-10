@@ -1,7 +1,1 @@
-base64
-io
-wave
-logging
-time
-os
 SpeechRecognition

@@ -9,9 +9,8 @@ import os
 def handle(audio_64):
     """Decodes Base64 audio, verifies it as a WAV file, and transcribes it to text."""
     diagnostics = os.getenv("DIAGNOSTICS", "false").lower() == "true"
-    log_dir = os.getenv("LOG_DIR", "/tmp")
+    log_path = os.getenv("LOG_FILE", "/tmp/RWVT.log")
     if diagnostics:
-        log_path = os.path.join(log_dir, "rwvt_detect.log")
         logging.basicConfig(log_path, level=logging.INFO, format='%(asctime)s - %(message)s')
     
     def log_event(message, error_message=None):
