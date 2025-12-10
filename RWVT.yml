@@ -1,0 +1,15 @@
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+
+functions:
+  RWVT:
+    lang: python3-http-debian
+    handler: ./main
+    image: localhost:5000/RWVT:latest
+    min_replicas: 1
+    build_args:
+      ADDITIONAL_PACKAGE: ""
+    environment:
+      DIAGNOSTICS: "false"
+      LOG_FILE: "RWVT.log"

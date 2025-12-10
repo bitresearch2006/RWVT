@@ -4,11 +4,15 @@ import wave
 import speech_recognition as sr
 import logging
 import time
+import os
 
-def rwvt(sub_json, diagnostics=False):
+def handle(audio_64):
     """Decodes Base64 audio, verifies it as a WAV file, and transcribes it to text."""
+    diagnostics = os.getenv("DIAGNOSTICS", "false").lower() == "true"
+    log_dir = os.getenv("LOG_DIR", "/tmp")
     if diagnostics:
-        logging.basicConfig(filename='rwvt_log.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+        log_path = os.path.join(log_dir, "rwvt_detect.log")
+        logging.basicConfig(log_path, level=logging.INFO, format='%(asctime)s - %(message)s')
     
     def log_event(message, error_message=None):
         if diagnostics:
@@ -22,7 +26,7 @@ def rwvt(sub_json, diagnostics=False):
         log_event("Starting rwvt function")
         
         # Decode the base64-encoded audio
-        audio_bytes = base64.b64decode(sub_json["audio"])
+        audio_bytes = base64.b64decode(audio_64)
         log_event("Decoded base64 audio")
 
         # Create an in-memory buffer for the audio
